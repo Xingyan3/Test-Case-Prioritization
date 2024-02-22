@@ -1,0 +1,6 @@
+4 9 4 < input/ft.15
+3 2 4 < input/ct.20
+4 2 1 < input/dat777
+1 1 1 < input/nt.32
+< input/ad.1
+2 5 6 < input/adt.55

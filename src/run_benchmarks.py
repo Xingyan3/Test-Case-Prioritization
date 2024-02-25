@@ -265,6 +265,44 @@ def statement_random(bm):
   os.chdir('..')
 
 
+def statement_additional(bm): 
+
+  os.chdir('./' + bm)
+  os.system('rm -rf test_suite_statement_random.txt')
+
+  baseline = load_baseline()
+  
+  scs, test_count = load_single_execution_statistics()
+
+  max_cov_test = max(scs, key=lambda x: x['executed_line_num'])
+  test_suite = [max_cov_test['testid']]
+  coverd_lines = set(max_cov_test['executed_line_no'])
+  
+  scs.remove(max_cov_test)
+
+  while len(coverd_lines) < baseline['executed_line_num'] and len(scs) > 0:
+
+    all_diffs = [set(x['executed_line_no']).difference(coverd_lines) for x in scs]
+    max_diff = max(all_diffs, key=lambda y: len(y))
+    max_diff_idx = all_diffs.index(max_diff)
+
+    if len(max_diff) > 0:
+      test_suite.append(scs[max_diff_idx]['testid'])
+      coverd_lines = coverd_lines.union(max_diff)
+      scs.pop(max_diff_idx)
+
+  with open('universe.txt', 'r') as f:
+    lines = f.readlines()
+    new_tests = [lines[i] for i in test_suite]
+    with open('test_suite_statement_additional.txt', 'w') as f:
+      f.writelines(new_tests)
+
+  print(f'test_suite len: {len(test_suite)}, total_test_count: {test_count}')
+  print (f'test_suite: {test_suite}')
+  print(f'coverd_lines: {len(coverd_lines)}, baseline_executed_line_num: {baseline['executed_line_num']}')
+  os.chdir('..')
+
+
 def main():
   arg_parser = argparse.ArgumentParser()
 
@@ -321,7 +359,8 @@ def main():
       for bm in benchmarks:
         statement_random(bm) 
     elif args.prioritization == 'additional':
-      pass 
+      for bm in benchmarks:
+        statement_additional(bm)
   elif args.criteria == 'branch':
     if args.prioritization == 'baseline':
       pass

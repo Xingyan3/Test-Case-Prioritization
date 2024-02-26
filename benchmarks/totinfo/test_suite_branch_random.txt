@@ -1,0 +1,9 @@
+<  universe/test322.inc
+< universe/tst2=.mat
+< universe/jkAEt.mat
+< universe/12new18
+< universe/new1
+< universe/12new33
+< universe/12new15
+< universe/tst79
+< universe/tst44

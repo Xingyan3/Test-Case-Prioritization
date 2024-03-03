@@ -53,18 +53,37 @@ def evaluate(benchmark, criteria, prioritization, baseline_suite):
   exposed_faults_set = set()
 
   for t in test_suite:
-    origin_output = subprocess.run(['./' + benchmark] + t.split(' '), capture_output=True, text=True).stdout
-    # print('*'*10)
-    # print(f'original output: {origin_output}')
-    for d in faulty_dirs:
-      faulty_output = subprocess.run([f'./{d}/' + benchmark] + t.split(' '), capture_output=True, text=True).stdout
-      
-      if origin_output != faulty_output:
-        exposed_faults.append({'faulty_version': d.split('v')[1], 'expected_output': origin_output, 'actual_output': faulty_output})
-        exposed_faults_set.add(d.split('v')[1])
+    test_input, file_in, test_file_path = t.rstrip('\n').rpartition('<')
+    
+    # print('./' + benchmark + ' ' + test_input)
+    # print(test_file_path.split(' ')[-1])
 
-      # print(f'faulty output: {faulty_output}')
+    if file_in:
+      with open(test_file_path.split(' ')[-1], 'r') as f:
+        file_data = f.read()
+      origin_output = subprocess.run('./' + benchmark + ' ' + test_input, shell=True, input=file_data, capture_output=True, text=True).stdout
+      # print('*'*10)
+      # print(f'original output: {origin_output}')
+      for d in faulty_dirs:
+        faulty_output = subprocess.run(f'./{d}/' + benchmark + ' ' + test_input, shell=True, input=file_data, capture_output=True, text=True, errors='ignore').stdout # error in printtokens2 -t
+        
+        if origin_output != faulty_output:
+          exposed_faults.append({'faulty_version': d.split('v')[1], 'expected_output': origin_output, 'actual_output': faulty_output})
+          exposed_faults_set.add(d.split('v')[1])
+    else:
+      test_input = test_file_path
+      origin_output = subprocess.run('./' + benchmark + ' ' + test_input, shell=True, capture_output=True, text=True).stdout
+      # print('*'*10)
+      # print(f'original output: {origin_output}')
+      for d in faulty_dirs:
+        faulty_output = subprocess.run(f'./{d}/' + benchmark + ' ' + test_input, shell=True, capture_output=True, text=True, errors='ignore').stdout
+        
+        if origin_output != faulty_output:
+          exposed_faults.append({'faulty_version': d.split('v')[1], 'expected_output': origin_output, 'actual_output': faulty_output})
+          exposed_faults_set.add(d.split('v')[1])
+
       
+      # print(f'faulty output: {faulty_output}')
 
   print(f'Exposed faults for {benchmark}: {exposed_faults_set}')
   print(f'Number of exposed faults: {len(exposed_faults_set)}')

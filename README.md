@@ -25,9 +25,9 @@ The script supports several command-line arguments to customize its execution:
 
 -p, --prioritization: Select the test case prioritization strategy. Choices are baseline, random, total, additional. Default is baseline.
 
--b, --benchmark: Specify one or more benchmarks to run. Default is schedule2. To run all benchmarks, pass all.
+-b, --benchmark: Specify one or more benchmarks to run. Default is schedule2. To run all benchmarks, pass `all`.
 
--v, --verify: Enable verification of the test suite. This does not take any value. Will print verification result.
+-v, --verify: Enable verification of the test suite. This does not take any value. Will print verification result. Choos from [`tcas`, `totinfo`, `schedule`, `schedule2`, `totinfo`, `printtokens`, `printtokens2`, `replace`].
 
 -s, --sss: Create single execution statement coverage statistics. This does not take any value. Will `create single_execution_{criteria}_statistics.json`
 
@@ -44,14 +44,14 @@ python create_test_suite.py -c branch
 python create_test_suite.py -p total
 ```
 
-- Run with a specific benchmark (e.g., benchmark1):
+- Run with a specific benchmark (e.g., `tcas`):
 ```shell
-python create_test_suite.py -b benchmark1
+python create_test_suite.py -b tcas
 ```
 
-- Run with multiple benchmarks (e.g., benchmark1 benchmark2):
+- Run with multiple benchmarks (e.g., `tcas`, `totinfo`):
 ```shell
-python create_test_suite.py -b benchmark1 benchmark2
+python create_test_suite.py -b tcas totinfo
 ```
 - Enable test suite verification:
 ```shell
@@ -95,49 +95,49 @@ To execute the program with its default settings, you can run the script without
 ```bash
 python evaluation.py
 ```
-By default, this will evaluate using statement coverage criteria, random prioritization, and the schedule2 benchmark.
+By default, this will evaluate using statement coverage criteria, random prioritization, and the `schedule2` benchmark.
 
 ## Arguments
 The script accepts several command-line arguments to tailor its operation:
 
--c, --criteria: Specifies the coverage criteria to be used. Options include statement and branch, with statement being the default.
+`-c`, `--criteria`: Specifies the coverage criteria to be used. Options include statement and branch, with statement being the default.
 
--p, --prioritization: Selects the test case prioritization strategy from random, total, and additional. The default is random.
+`-p`, `--prioritization`: Selects the test case prioritization strategy from random, total, and additional. The default is random.
 
--b, --benchmark: Designates one or more benchmarks to evaluate. The default is schedule2. You can specify multiple benchmarks by separating them with spaces or use all to select all available benchmarks.
+`-b`, `--benchmark`: Designates one or more benchmarks to evaluate. The default is schedule2. You can specify multiple benchmarks by separating them with spaces or use `all` to select all available benchmarks. Choos from [`tcas`, `totinfo`, `schedule`, `schedule2`, `totinfo`, `printtokens`, `printtokens2`, `replace`].
 
--t, --baseline_suite: If set, evaluates the effectiveness of the original test suite in exposing faults.
+`-t`, `--baseline_suite`: If set, evaluates the effectiveness of the original test suite in exposing faults.
 
 ## Examples
 Here are several examples showing how to use the script with various configurations:
 
 - Evaluate using branch coverage criteria:
 ```bash
-python evaluation.py --criteria branch
+python evaluation.py -c branch
 ```
 - Apply the total prioritization strategy:
 ```bash
-python evaluation.py --prioritization total
+python evaluation.py -p total
 ```
-- Evaluate a specific benchmark, such as benchmark1:
+- Evaluate a specific benchmark, such as `tcas`:
 ```bash
-python evaluation.py --benchmark benchmark1
+python evaluation.py -b tcas
 ```
-- Evaluate multiple benchmarks, for instance, benchmark1 and benchmark2:
+- Evaluate multiple benchmarks, for instance, tcas and `replace`:
 ```bash
-python evaluation.py --benchmark benchmark1 benchmark2
+python evaluation.py -b tcas replace
 ```
 - Evaluate with all available benchmarks:
 ```bash
-python evaluation.py --benchmark all
+python evaluation.py -b all
 ```
 - Explore the set of faults exposed by the baseline test suite:
 ```bash
-python evaluation.py --baseline_suite
+python evaluation.py -t
 ```
 - Combine various arguments for a comprehensive evaluation:
 ```bash
-python evaluation.py --criteria branch --prioritization additional --benchmark benchmark1 benchmark2 --baseline_suite
+python evaluation.py -c branch -r additional -b tcas totinfo -t
 ```
 
 ## Getting Help

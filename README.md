@@ -5,6 +5,13 @@ Requirements to run our python project:
 - Ubuntu 20.04
 - Python 3
 
+Clone repo and change directory to the source before running:
+```bash
+git clone https://github.com/ucr-cs206/cs206-project-xyzry.git
+cd cs206-project-xyzry
+cd src
+```
+
 # Create Test Suite
 The program to create the test suites is `create_test_suite.py`.
 

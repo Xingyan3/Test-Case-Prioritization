@@ -53,17 +53,34 @@ def evaluate(benchmark, criteria, prioritization, baseline_suite):
   exposed_faults_set = set()
 
   for t in test_suite:
-    origin_output = subprocess.run(['./' + benchmark] + t.split(' '), capture_output=True, text=True).stdout
-    # print('*'*10)
-    # print(f'original output: {origin_output}')
-    for d in faulty_dirs:
-      faulty_output = subprocess.run([f'./{d}/' + benchmark] + t.split(' '), capture_output=True, text=True).stdout
-      
-      if origin_output != faulty_output:
-        exposed_faults.append({'faulty_version': d.split('v')[1], 'expected_output': origin_output, 'actual_output': faulty_output})
-        exposed_faults_set.add(d.split('v')[1])
-
-      # print(f'faulty output: {faulty_output}')
+    file_in = False
+    for char in t:
+      if char == '<':
+        file_in = True
+    
+    if file_in:
+      test_file_path = t.rstrip('\n').split(' ')[-1]
+      with open(test_file_path, 'r') as f:
+        origin_output = subprocess.run(['./' + benchmark], stdin=f, capture_output=True, text=True).stdout
+        # print('*'*10)
+        # print(f'original output: {origin_output}')
+        for d in faulty_dirs:
+          
+          faulty_output = subprocess.run([f'./{d}/' + benchmark], stdin=f, capture_output=True, text=True).stdout
+          
+          if origin_output != faulty_output:
+            exposed_faults.append({'faulty_version': d.split('v')[1], 'expected_output': origin_output, 'actual_output': faulty_output})
+            exposed_faults_set.add(d.split('v')[1])
+    else:
+      origin_output = subprocess.run(['./' + benchmark] + t.split(' '), capture_output=True, text=True).stdout
+      # print('*'*10)
+      # print(f'original output: {origin_output}')
+      for d in faulty_dirs:
+        faulty_output = subprocess.run([f'./{d}/' + benchmark] + t.split(' '), capture_output=True, text=True).stdout
+        
+        if origin_output != faulty_output:
+          exposed_faults.append({'faulty_version': d.split('v')[1], 'expected_output': origin_output, 'actual_output': faulty_output})
+          exposed_faults_set.add(d.split('v')[1])
       
 
   print(f'Exposed faults for {benchmark}: {exposed_faults_set}')

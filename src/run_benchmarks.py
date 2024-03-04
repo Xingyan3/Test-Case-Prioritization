@@ -167,7 +167,7 @@ def total_prioritization(bm, criteria):
   project = os.path.join('.', bm)
 
   os.chdir(project)
-  os.system(f'rm -rf test_suite_{criteria}_total.txt')
+  os.system(f"rm -rf test_suite_{criteria}_total.txt")
   
   baseline = load_baseline(criteria)
 
@@ -209,13 +209,13 @@ def total_prioritization(bm, criteria):
       f.writelines(new_tests)
 
   print('*'*10)
-  print(f'test_suite len: {len(test_suite)}, total_test_count: {test_count}')
-  print (f'test_suite: {test_suite}')
+  print(f"test_suite len: {len(test_suite)}, total_test_count: {test_count}")
+  print (f"test_suite: {test_suite}")
 
   if criteria == 'statement':
-    print(f'coverd_lines: {len(coverd_lines)}, baseline_executed_line_num: {baseline['executed_line_num']}')
+    print(f"coverd_lines: {len(coverd_lines)}, baseline_executed_line_num: {baseline['executed_line_num']}")
   else:
-    print(f'coverd_branches: {len(coverd_branches)}, baseline_executed_branch_num: {baseline['executed_branch_num']}')
+    print(f"coverd_branches: {len(coverd_branches)}, baseline_executed_branch_num: {baseline['executed_branch_num']}")
   os.chdir('..')
     
 
@@ -253,7 +253,7 @@ def baseline_statement_coverage(bm):
 
   sc, test_count = accumulate_execution(project, 'universe.txt')
   
-  print(f'Baseline statement coverage for {bm}: {sc.statement_coverage()}')
+  print(f"Baseline statement coverage for {bm}: {sc.statement_coverage()}")
   with open("baseline_statement.json", 'w') as f:
     d = sc.to_dict()
     d['test_count'] = test_count
@@ -282,9 +282,9 @@ def verify(bm, criteria, prioritization):
     baseline_cov = baseline['statement_coverage']
 
     if round(sc.statement_coverage(), 2) != round(baseline_cov, 2):
-      sys.exit(f'Failed to cover all lines. statement_coverage: {sc.statement_coverage()}, baseline_cov: {baseline_cov}')
+      sys.exit(f"Failed to cover all lines. statement_coverage: {sc.statement_coverage()}, baseline_cov: {baseline_cov}")
     
-    print(f'Verified {criteria}_{prioritization} coverage for {bm}:\n execution_cov: {sc.statement_coverage()}, baseline_cov: {baseline_cov}')
+    print(f"Verified {criteria}_{prioritization} coverage for {bm}:\n execution_cov: {sc.statement_coverage()}, baseline_cov: {baseline_cov}")
   
   else:
     bc, _ = accumulate_execution_branch(project, test_suite_name)
@@ -295,9 +295,9 @@ def verify(bm, criteria, prioritization):
     baseline_cov = baseline['branch_coverage']
 
     if round(bc.branch_coverage(), 2) != round(baseline_cov, 2):
-      sys.exit(f'Failed to cover all branches. branch_coverage: {bc.branch_coverage()}, baseline_cov: {baseline_cov}')
+      sys.exit(f"Failed to cover all branches. branch_coverage: {bc.branch_coverage()}, baseline_cov: {baseline_cov}")
     
-    print(f'Verified {criteria}_{prioritization} coverage for {bm}:\n execution_cov: {bc.branch_coverage()}, baseline_cov: {baseline_cov}')
+    print(f"Verified {criteria}_{prioritization} coverage for {bm}:\n execution_cov: {bc.branch_coverage()}, baseline_cov: {baseline_cov}")
 
   os.chdir('..')
 
@@ -305,7 +305,7 @@ def verify(bm, criteria, prioritization):
 def random_prioritization(bm, criteria):
 
   os.chdir('./' + bm)
-  os.system(f'rm -rf test_suite_{criteria}_random.txt')
+  os.system(f"rm -rf test_suite_{criteria}_random.txt")
 
   baseline = load_baseline(criteria)
   
@@ -348,17 +348,17 @@ def random_prioritization(bm, criteria):
   with open('universe.txt', 'r') as f:
     lines = f.readlines()
     new_tests = [lines[i] for i in test_suite]
-    with open(f'test_suite_{criteria}_random.txt', 'w') as f:
+    with open(f"test_suite_{criteria}_random.txt", 'w') as f:
       f.writelines(new_tests) 
   
   print('*'*10)
-  print(f'test_suite len: {len(test_suite)}, total_test_count: {test_count}')
-  print (f'test_suite: {test_suite}')
+  print(f"test_suite len: {len(test_suite)}, total_test_count: {test_count}")
+  print (f"test_suite: {test_suite}")
 
   if criteria == 'statement':
-    print(f'coverd_lines: {len(coverd_lines)}, baseline_executed_line_num: {baseline["executed_line_num"]}')
+    print(f"coverd_lines: {len(coverd_lines)}, baseline_executed_line_num: {baseline['executed_line_num']}")
   else:
-    print(f'coverd_branches: {len(coverd_branches)}, baseline_executed_branch_num: {baseline["executed_branch_num"]}')
+    print(f"coverd_branches: {len(coverd_branches)}, baseline_executed_branch_num: {baseline['executed_branch_num']}")
 
   os.chdir('..')
 
@@ -366,7 +366,7 @@ def random_prioritization(bm, criteria):
 def additional_prioritization(bm, criteria): 
 
   os.chdir('./' + bm)
-  os.system(f'rm -rf test_suite_{criteria}_additional.txt')
+  os.system(f"rm -rf test_suite_{criteria}_additional.txt")
 
   baseline = load_baseline(criteria)
   
@@ -410,17 +410,17 @@ def additional_prioritization(bm, criteria):
   with open('universe.txt', 'r') as f:
     lines = f.readlines()
     new_tests = [lines[i] for i in test_suite]
-    with open(f'test_suite_{criteria}_additional.txt', 'w') as f:
+    with open(f"test_suite_{criteria}_additional.txt", 'w') as f:
       f.writelines(new_tests)
 
   print('*'*10)
-  print(f'test_suite len: {len(test_suite)}, total_test_count: {test_count}')
-  print (f'test_suite: {test_suite}')
+  print(f"test_suite len: {len(test_suite)}, total_test_count: {test_count}")
+  print (f"test_suite: {test_suite}")
 
   if criteria == 'statement':
-    print(f'coverd_lines: {len(coverd_lines)}, baseline_executed_line_num: {baseline["executed_line_num"]}')
+    print(f"coverd_lines: {len(coverd_lines)}, baseline_executed_line_num: {baseline['executed_line_num']}")
   else:
-    print(f'coverd_branches: {len(coverd_branches)}, baseline_executed_branch_num: {baseline["executed_branch_num"]}')
+    print(f"coverd_branches: {len(coverd_branches)}, baseline_executed_branch_num: {baseline['executed_branch_num']}")
 
   os.chdir('..')
 
@@ -465,7 +465,7 @@ def baseline_branch_coverage(bm):
   os.system('rm -rf baseline_branch.json')
   bc, test_count = accumulate_execution_branch(project, 'universe.txt')
 
-  print(f'Baseline branch coverage for {bm}: {bc.branch_coverage()}')
+  print(f"Baseline branch coverage for {bm}: {bc.branch_coverage()}")
 
   with open('baseline_branch.json', 'w') as f:
     d = bc.to_dict()

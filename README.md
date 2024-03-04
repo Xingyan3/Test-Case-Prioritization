@@ -28,13 +28,13 @@ This will run the program using the default options: statement coverage criteria
 ## Arguments
 The script supports several command-line arguments to customize its execution:
 
-`-c`, `--criteria`: Choose the coverage criteria. Options are statement or branch. Default is statement.
+`-c`, `--criteria`: Choose the coverage criteria. Options are `statement` or `branch`. Default is `statement`.
 
-`-p`, `--prioritization`: Select the test case prioritization strategy. Choices are baseline, random, total, additional. Default is baseline.
+`-p`, `--prioritization`: Select the test case prioritization strategy. Choices are `baseline`, `random`, `total`, `additional`. Default is `baseline`.
 
-`-b`, `--benchmark`: Specify one or more benchmarks to run. Default is schedule2. To run all benchmarks, pass `all`.
+`-b`, `--benchmark`: Specify one or more benchmarks to run. Default is schedule2. To run all benchmarks, pass `all`. Choos from [`tcas`, `totinfo`, `schedule`, `schedule2`, `totinfo`, `printtokens`, `printtokens2`, `replace`].
 
-`-v`, `--verify`: Enable verification of the test suite. This does not take any value. Will print verification result. Choos from [`tcas`, `totinfo`, `schedule`, `schedule2`, `totinfo`, `printtokens`, `printtokens2`, `replace`].
+`-v`, `--verify`: Enable verification of the test suite. This does not take any value. Will print verification result. 
 
 `-s`, `--sss`: Create single execution statement coverage statistics. This does not take any value. Will create `single_execution_{criteria}_statistics.json`
 
@@ -86,7 +86,7 @@ python create_test_suite.py --help
 
 Their names have the format: `test_suite_{criteria}_{prioritization}.txt`.
 
-E.g. test_suite_statement_total represents the test suites created using the statement coverage and total coverage prioritization.
+E.g. `test_suite_statement_total.json` represents the test suites created using the statement coverage and total coverage prioritization.
 
 # Evaluation
 
@@ -107,11 +107,11 @@ By default, this will evaluate using statement coverage criteria, random priorit
 ## Arguments
 The script accepts several command-line arguments to tailor its operation:
 
-`-c`, `--criteria`: Specifies the coverage criteria to be used. Options include statement and branch, with statement being the default.
+`-c`, `--criteria`: Specifies the coverage criteria to be used. Options include `statement` and `branch`, with `statement` being the default.
 
-`-p`, `--prioritization`: Selects the test case prioritization strategy from random, total, and additional. The default is random.
+`-p`, `--prioritization`: Selects the test case prioritization strategy from `random`, `total`, and `additional`. The default is `random`.
 
-`-b`, `--benchmark`: Designates one or more benchmarks to evaluate. The default is schedule2. You can specify multiple benchmarks by separating them with spaces or use `all` to select all available benchmarks. Choos from [`tcas`, `totinfo`, `schedule`, `schedule2`, `totinfo`, `printtokens`, `printtokens2`, `replace`].
+`-b`, `--benchmark`: Designates one or more benchmarks to evaluate. The default is `schedule2`. You can specify multiple benchmarks by separating them with spaces or use `all` to select all available benchmarks. Choos from [`tcas`, `totinfo`, `schedule`, `schedule2`, `totinfo`, `printtokens`, `printtokens2`, `replace`].
 
 `-t`, `--baseline_suite`: If set, evaluates the effectiveness of the original test suite in exposing faults.
 

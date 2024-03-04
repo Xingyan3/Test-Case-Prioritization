@@ -97,8 +97,8 @@ def main():
                           help='Choose coverage criteria from "statement" or "branch".')
 
   arg_parser.add_argument('-p', '--prioritization',
-                          choices=['baseline', 'random', 'total', 'additional'],
-                          default='baseline',
+                          choices=['random', 'total', 'additional'],
+                          default='random',
                           help='Choose from "baseline", "random", "total", "additional". Default is "baseline".')
 
   arg_parser.add_argument('-b', '--benchmark',

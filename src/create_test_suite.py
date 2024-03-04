@@ -490,7 +490,7 @@ def main():
 
   arg_parser.add_argument('-b', '--benchmark',
                           nargs='+',
-                          default='schedule2',
+                          default=["schedule2"],
                           help='Choose a benchmark to run. Default is "schedule2". Can pass "all".')
 
   arg_parser.add_argument('-v', '--verify',

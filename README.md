@@ -21,15 +21,15 @@ This will run the program using the default options: statement coverage criteria
 ## Arguments
 The script supports several command-line arguments to customize its execution:
 
--c, --criteria: Choose the coverage criteria. Options are statement or branch. Default is statement.
+`-c`, `--criteria`: Choose the coverage criteria. Options are statement or branch. Default is statement.
 
--p, --prioritization: Select the test case prioritization strategy. Choices are baseline, random, total, additional. Default is baseline.
+`-p`, `--prioritization`: Select the test case prioritization strategy. Choices are baseline, random, total, additional. Default is baseline.
 
--b, --benchmark: Specify one or more benchmarks to run. Default is schedule2. To run all benchmarks, pass `all`.
+`-b`, `--benchmark`: Specify one or more benchmarks to run. Default is schedule2. To run all benchmarks, pass `all`.
 
--v, --verify: Enable verification of the test suite. This does not take any value. Will print verification result. Choos from [`tcas`, `totinfo`, `schedule`, `schedule2`, `totinfo`, `printtokens`, `printtokens2`, `replace`].
+`-v`, `--verify`: Enable verification of the test suite. This does not take any value. Will print verification result. Choos from [`tcas`, `totinfo`, `schedule`, `schedule2`, `totinfo`, `printtokens`, `printtokens2`, `replace`].
 
--s, --sss: Create single execution statement coverage statistics. This does not take any value. Will `create single_execution_{criteria}_statistics.json`
+`-s`, `--sss`: Create single execution statement coverage statistics. This does not take any value. Will `create single_execution_{criteria}_statistics.json`
 
 ## Examples
 Here are some examples of how to run the program with different configurations:

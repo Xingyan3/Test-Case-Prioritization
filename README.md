@@ -1,4 +1,4 @@
-All source files are under the /src directory. The entire project was implemented using Python.
+All source files are under the /src directory. The entire project was implemented in Python.
 
 Requirements to run our python project:
 

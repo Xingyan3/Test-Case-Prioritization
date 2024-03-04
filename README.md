@@ -77,7 +77,7 @@ python create_test_suite.py --help
 ## Created test suites
 **The created test suites are located under the each benchmark directory separately.**
 
-Their names have the format: test_suite_{criteria}_{prioritization}.txt.
+Their names have the format: `test_suite_{criteria}_{prioritization}.txt`.
 
 E.g. test_suite_statement_total represents the test suites created using the statement coverage and total coverage prioritization.
 

@@ -29,7 +29,7 @@ The script supports several command-line arguments to customize its execution:
 
 `-v`, `--verify`: Enable verification of the test suite. This does not take any value. Will print verification result. Choos from [`tcas`, `totinfo`, `schedule`, `schedule2`, `totinfo`, `printtokens`, `printtokens2`, `replace`].
 
-`-s`, `--sss`: Create single execution statement coverage statistics. This does not take any value. Will `create single_execution_{criteria}_statistics.json`
+`-s`, `--sss`: Create single execution statement coverage statistics. This does not take any value. Will create `single_execution_{criteria}_statistics.json`
 
 ## Examples
 Here are some examples of how to run the program with different configurations:
